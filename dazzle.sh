@@ -111,9 +111,29 @@ reload_ssh_config () {
     echo "  -> /etc/rc.d/sshd reload"
     /etc/rc.d/sshd reload >/dev/null
 
-  else
+  elif [ -f "/etc/init.d/ssh" ]; then
     echo "  -> /etc/init.d/ssh reload"
     /etc/init.d/ssh reload >/dev/null
+
+  # check for systemd
+  elif which systemctl > /dev/null; then
+
+    if systemctl --quiet is-active sshd; then
+      echo "  -> systemctl restart sshd"
+      systemctl --quiet restart sshd
+
+    elif systemctl --quiet is-active ssh; then
+      echo "  -> systemctl restart ssh"
+      systemctl --quiet restart ssh
+
+    else
+      echo "${BOLD}Could not restart ssh... Please restart it manually before continuing.${NORMAL}"
+      echo
+    fi
+
+  else
+    echo "${BOLD}Could not restart ssh... Please restart it manually before continuing.${NORMAL}"
+    echo
   fi
 }
 
