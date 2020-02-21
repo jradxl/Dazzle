@@ -44,16 +44,22 @@ show_help () {
 }
 
 create_account () {
+
+  if [ "$DAZZLE_USER" == "root" ]; then
+    echo "ERROR: Was going to modify ROOT account, so exiting."
+    exit 1
+  fi
+
   STORAGE=$( grep "^$DAZZLE_USER:" /etc/passwd | cut -d : -f 1 )
 
   # Create user
-  if [ "$STORAGE" = "$DAZZLE_USER" ]; then
+  if [ "$STORAGE" == "$DAZZLE_USER" ]; then
     echo "  -> Account already exists."
   else
     STORAGE=$( grep "^$DAZZLE_GROUP:" /etc/group | cut -d : -f 1 )
     GIT_SHELL=$( which git-shell )
 
-    if [ "$STORAGE" = "$DAZZLE_GROUP" ]; then
+    if [ "$STORAGE" == "$DAZZLE_GROUP" ]; then
       echo "  -> useradd $DAZZLE_USER --create-home --home $DAZZLE_HOME --system --shell $GIT_SHELL --password \"*\" --gid $DAZZLE_GROUP"
       useradd $DAZZLE_USER --create-home --home $DAZZLE_HOME --system --shell $GIT_SHELL --password "*" --gid $DAZZLE_GROUP
 
@@ -87,7 +93,7 @@ configure_ssh () {
 
   # Disable the password for the "storage" user to force authentication using a key
   CONFIG_CHECK=$( grep "^# SparkleShare$" /etc/ssh/sshd_config )
-  if ! [ "$CONFIG_CHECK" = "# SparkleShare" ]; then
+  if ! [ "$CONFIG_CHECK" == "# SparkleShare" ]; then
       {
           echo ""
           echo "# SparkleShare"
@@ -291,6 +297,10 @@ case $1 in
     reload_ssh_config
     echo
     echo "${BOLD}Setup complete!${NORMAL}"
+    echo "Script has used..."
+    echo "User: $DAZZLE_USER "
+    echo "Group: $DAZZLE_GROUP"
+    echo "Home: $DAZZLE_HOME"
     echo "To create a new project, run \"dazzle create PROJECT_NAME\"."
     echo
     ;;

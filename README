@@ -1,5 +1,9 @@
 # Dazzle, SparkleShare host setup script
 
+Using FORK by vlaube-de/Dazzle for systemd support
+This version adds some minor changes and
+add an run script for my needs
+
 An easier and less error prone way to set up a SparkleShare host.
 Created to work on Debian and Red Hat based systems.
 
