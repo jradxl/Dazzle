@@ -11,7 +11,7 @@ export DAZZLE_HOME=/home/dazzle/storage
 
 if [ ! -f /usr/local/bin/dazzle ]; then
     echo "Getting Dazzle"
-    curl https://raw.githubusercontent.com/hbons/Dazzle/master/dazzle.sh --output /usr/local/bin/dazzle
+    curl https://raw.githubusercontent.com/jradxl/Dazzle/master/dazzle.sh --output /usr/local/bin/dazzle
 fi
 
 if [ -f "/usr/local/bin/dazzle" ] && [ ! -d "$DAZZLE_HOME" ]; then
