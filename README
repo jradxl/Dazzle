@@ -7,6 +7,10 @@ add an run script for my needs
 An easier and less error prone way to set up a SparkleShare host.
 Created to work on Debian and Red Hat based systems.
 
+Feb 2020
+This version tries to ensure consistent Environment Variables
+by introducing a parameters.sh file. Trying to avoid the mistake
+I made initially by running the create option with different variables
 
 ## Usage
 

@@ -25,10 +25,21 @@ GIT=$( which git ) > /dev/null
 BOLD=$( tput bold )
 NORMAL=$( tput sgr0 )
 
-# Nice defaults
-DAZZLE_USER="${DAZZLE_USER:-storage}"
-DAZZLE_GROUP="${DAZZLE_GROUP:-$DAZZLE_USER}"
-DAZZLE_HOME="${DAZZLE_HOME:-/home/$DAZZLE_USER}"
+
+if [ -f ./parameters.sh ]; then
+    echo "Using provided parameters"
+    source ./parameters.sh
+else
+    echo "Creating default parameters"
+    # Nice defaults
+    export DAZZLE_USER="${DAZZLE_USER:-storage}"
+    export DAZZLE_GROUP="${DAZZLE_GROUP:-$DAZZLE_USER}"
+    export DAZZLE_HOME="${DAZZLE_HOME:-/home/$DAZZLE_USER}"
+fi
+
+echo "DAZZLE_USER $DAZZLE_USER"
+echo "DAZZLE_GROUP $DAZZLE_GROUP"
+echo "DAZZLE_HOME $DAZZLE_HOME"
 
 show_help () {
     echo "${BOLD}Dazzle, SparkleShare host setup script${NORMAL}"
@@ -330,3 +341,4 @@ case $1 in
     show_help
     ;;
 esac
+
