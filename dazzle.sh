@@ -62,7 +62,6 @@ create_account () {
     if [ "$STORAGE" == "$DAZZLE_GROUP" ]; then
       echo "  -> useradd $DAZZLE_USER --create-home --home $DAZZLE_HOME --system --shell $GIT_SHELL --password \"*\" --gid $DAZZLE_GROUP"
       useradd $DAZZLE_USER --create-home --home $DAZZLE_HOME --system --shell $GIT_SHELL --password "*" --gid $DAZZLE_GROUP
-
     else
       echo "  -> useradd $DAZZLE_USER --create-home --home $DAZZLE_HOME --system --shell $GIT_SHELL --password \"*\" --user-group"
       useradd $DAZZLE_USER --create-home --home $DAZZLE_HOME --system --shell $GIT_SHELL --password "*" --user-group
@@ -84,6 +83,9 @@ configure_ssh () {
 
   echo "  -> touch $DAZZLE_HOME/.ssh/authorized_keys"
   touch "$DAZZLE_HOME/.ssh/authorized_keys"
+
+  echo "  -> chown -R $DAZZLE_USER:$DAZZLE_GROUP $DAZZLE_HOME/.ssh"
+  chown -R  "$DAZZLE_USER:$DAZZLE_GROUP" "$DAZZLE_HOME/.ssh"
 
   echo "  -> chmod 700 $DAZZLE_HOME/.ssh"
   chmod 700 "$DAZZLE_HOME/.ssh"

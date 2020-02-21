@@ -7,7 +7,7 @@
 #Hard coded parameters
 #Must be available to all Commands
 export DAZZLE_USER=dazzle
-export DAZZLE_HOME=/home/dazzle/storage
+export DAZZLE_HOME=/home/dazzle
 
 if [ ! -f /usr/local/bin/dazzle ]; then
     echo "Getting Dazzle"
