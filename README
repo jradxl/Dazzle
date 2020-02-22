@@ -44,3 +44,5 @@ Available options are the following:
 * DAZZLE_USER: the Dazzle user. Defaults to "storage".
 * DAZZLE_GROUP: the Dazzle group. Defaults to "storage".
 * DAZZLE_HOME: the directory used to store projects. Defaults to "/home/storage".
+
+

@@ -38,3 +38,4 @@ echo "Followed by:  dazzle link"
 echo "and enter the ID from Sparkle's Icon Menu."
 echo
 
+
