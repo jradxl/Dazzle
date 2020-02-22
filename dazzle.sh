@@ -26,9 +26,9 @@ BOLD=$( tput bold )
 NORMAL=$( tput sgr0 )
 
 
-if [ -f ./parameters.sh ]; then
+if [ -f ~/.config/dazzle/parameters.sh ]; then
     echo "Using provided parameters"
-    source ./parameters.sh
+    source ~/.config/dazzle/parameters.sh
 else
     echo "Creating default parameters"
     # Nice defaults
